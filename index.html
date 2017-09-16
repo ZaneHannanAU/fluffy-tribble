@@ -6,13 +6,15 @@
   </head>
   <body>
     <div class="js">
+      <p>View on github: <a href="https://github.com/zanehannanau/fluffy-tribble/">fluffy-tribble</a>. Yes this is a randomly generated name.</p>
+      <p>Mixed-content is an issue here. You'll need to allow http access over https for this page.</p>
       <output name="errs"><pre id="errs">Errors:</pre></output>
       <form id="voter">
         <input type="text" id="vote" name="vote" value="copy" pattern="[a-z-]+">
         <button type="submit">Send</button>
-         <output name="result"><pre id="result">History:</pre></output>
+        <output name="result"><pre id="result">History:</pre></output>
       </form>
-      <p>Poll view automatically reloads every 5 minutes (3e5&thinsp;ms)</p>
+      <p>Poll view automatically reloads every 30 seconds (3e4&thinsp;ms)</p>
       <ol id="poll-view"></ol>
       <script src="./index.js" charset="utf-8"></script>
     </div>

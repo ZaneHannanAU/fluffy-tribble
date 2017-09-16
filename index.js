@@ -2,10 +2,14 @@ const voter = document.getElementById('voter')
 const result= document.getElementById('result')
 const pollView = document.getElementById('poll-view')
 const errs = document.getElementById('errs')
+const tdisable = b => {
+  voter.disabled = b
+  Array.from(voter.children).forEach(el => el.disabled = b)
+}
 
 voter.addEventListener('submit', e => {
   e.preventDefault()
-  voter.disabled = true
+  tdisable(true)
   fetch('http://kirby-poll.us-west-2.elasticbeanstalk.com/votes/kirby', {
     method: 'PUT',
     body: JSON.stringify({
@@ -33,7 +37,8 @@ voter.addEventListener('submit', e => {
     )
   })
   .catch(e => errs.insertAdjacentText('beforeend', '\n' + e.stack))
-  .then(() => voter.disabled = false)
+  .then(() => tdisable(false))
+  .then(() => document.getElementById('vote').focus())
 })
 
 const poll = () => {
@@ -42,7 +47,7 @@ const poll = () => {
   .then(j => {
     console.log(j);
     pollView.innerHTML = ''
-    for (const {tally, option} of j.sort((b, a) => a.tally - b.tally))
+    for (const {tally, option} of j.sort((b, a) => (a.tally - b.tally)))
       pollView.appendChild(document.createElement('li'))
       .innerText = String(tally + ': ' + option)
   })
@@ -51,4 +56,4 @@ const poll = () => {
   return poll
 }
 
-setInterval(poll(), 3e5)
+setInterval(poll(), 3e4)
