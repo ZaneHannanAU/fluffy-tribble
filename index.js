@@ -5,6 +5,7 @@ const errs = document.getElementById('errs')
 
 voter.addEventListener('submit', e => {
   e.preventDefault()
+  voter.disabled = true
   fetch('http://kirby-poll.us-west-2.elasticbeanstalk.com/votes/kirby', {
     method: 'PUT',
     body: JSON.stringify({
@@ -32,6 +33,7 @@ voter.addEventListener('submit', e => {
     )
   })
   .catch(e => errs.insertAdjacentText('beforeend', '\n' + e.stack))
+  .then(() => voter.disabled = false)
 })
 
 const poll = () => {
