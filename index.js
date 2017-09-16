@@ -1,6 +1,7 @@
 const voter = document.getElementById('voter')
 const result= document.getElementById('result')
 const pollView = document.getElementById('poll-view')
+const errs = document.getElementById('errs')
 
 voter.addEventListener('submit', e => {
   e.preventDefault()
@@ -30,17 +31,22 @@ voter.addEventListener('submit', e => {
       '\n' + JSON.stringify(j, null, 2)
     )
   })
+  .catch(e => errs.insertAdjacentText('beforeend', '\n' + e.stack))
 })
 
-const poll = () => fetch('http://kirby-poll.us-west-2.elasticbeanstalk.com/votes/kirby')
-.then(r => (console.log(r), r.json()))
-.then(j => {
-  console.log(j);
-  pollView.innerHTML = ''
-  for (const {tally, option} of j.sort((b, a) => a.tally - b.tally))
-    pollView.appendChild(document.createElement('li'))
-    .innerText = String(tally + ': ' + option)
-})
-poll()
+const poll = () => {
+  fetch('http://kirby-poll.us-west-2.elasticbeanstalk.com/votes/kirby')
+  .then(r => (console.log(r), r.json()))
+  .then(j => {
+    console.log(j);
+    pollView.innerHTML = ''
+    for (const {tally, option} of j.sort((b, a) => a.tally - b.tally))
+      pollView.appendChild(document.createElement('li'))
+      .innerText = String(tally + ': ' + option)
+  })
+  .catch(e => errs.insertAdjacentText('beforeend', '\n' + e.stack))
 
-setInterval(poll, 3e5)
+  return poll
+}
+
+setInterval(poll(), 3e5)
