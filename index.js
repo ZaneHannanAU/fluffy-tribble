@@ -3,7 +3,7 @@ const result= document.getElementById('result')
 const pollView = document.getElementById('poll-view')
 const errs = document.getElementById('errs')
 const int = {
-  re: /^\+?(0x[0-9A-Fa-f][0-9A-Fa-f_ ]+|0b[01][01_ ]+|[0-9][0-9_ ]*|0o[0-7][0-7_ ]+|[1-9][0-9_ ]*(?:e[+-]?[1-9][0-9_ ]+))|\+?([1-9][0-9_ ]*(?::[0-5]?[0-9])+)$/
+  re: /^\+?(0x[0-9A-Fa-f][0-9A-Fa-f_ ]+|0b[01][01_ ]+|[0-9][0-9_ ]*|0o[0-7][0-7_ ]+|[1-9][0-9_ ]*(?:e[+-]?[1-9][0-9_ ]+))|\+?([1-9][0-9_ ]*(?::[0-5]?[0-9])+)$/,
   rp(m, n, s) {
     if (n) return Number(n.replace(/[_ ]/g, ''))
     else return s
