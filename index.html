@@ -2,15 +2,21 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
     <title>Kirby poll thingy</title>
   </head>
   <body>
     <div class="js">
       <p>View on github: <a href="https://github.com/zanehannanau/fluffy-tribble/">fluffy-tribble</a>. Yes this is a randomly generated name.</p>
       <p>Mixed-content is an issue here. You'll need to allow http access over https for this page.</p>
+      <p>Please download and view from the filesystem if you're recieving <code>TypeError: Failed to fetch</code>'s. Or something.</p>
+      <p>Have fun screwing the poll up &#x1F608;.</p>
       <output name="errs"><pre id="errs">Errors:</pre></output>
       <form id="voter">
+        Vote for
         <input type="text" id="vote" name="vote" value="copy" pattern="[a-z-]+">
+        <input type="text" id="times" name="times" value="1" pattern="\+?(0x[0-9A-Fa-f][0-9A-Fa-f_ ]+|0b[01][01_ ]+|[0-9][0-9_ ]*|0o[0-7][0-7_ ]+|[1-9][0-9_ ]*(?::[0-5]?[0-9])+)">
+        times.
         <button type="submit">Send</button>
         <output name="result"><pre id="result">History:</pre></output>
       </form>
